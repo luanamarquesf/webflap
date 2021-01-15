@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Testar várias cadeias</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-list role="list">
+    <mat-list-item *ngFor="let item of testCases; let i = index">
+      <div class="flexed">
+        <app-regular-grammars-test (valueChange)="item.cadeia=$event" [isValid]="item.valid" [isLoading]="item.loading" [appearance]="standard"></app-regular-grammars-test>
+        <button type="button" mat-icon-button (click)="remove(i)">
+          <mat-icon aria-label="Excluir caso de teste" class="icon-outline">delete</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+    <mat-list-item>
+      <button mat-flat-button (click)="add()">
+        <mat-icon>add</mat-icon>
+        Novo caso de teste
+      </button>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fechar</button>
+  <button mat-button (click)="testAll()">
+    <mat-icon>play_circle</mat-icon>
+    Testar todas
+  </button>
+</mat-dialog-actions>

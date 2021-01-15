@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  --color-primary: #7b1fa2;
+  --color-accent: #69f0ae;
+}
+@font-face {
+  font-family: "oswald";
+  src: url("./assets/fonts/Oswald-VariableFont_wght.ttf") format("opentype");
+}
+@font-face {
+  font-family: "oswald-light";
+  src: url("./assets/fonts/Oswald-ExtraLight.ttf") format("opentype");
+}
+
+.pipe-format-pipe {
+  font-family: "oswald-light";
+  opacity: 0.5;
+  color: white;
+}
+
+.pipe-format-non-terminal {
+  font-weight: bold;
+  color: white;
+}
+
+.pipe-format-epsilon {
+  color: var(--color-primary);
+}
+
+.icon-outline {
+  font-family: 'Material Icons Outlined';
+}
+
+.size-holder {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+// Impede a seleção de itens clicáveis (cheers https://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting)
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.mat-tooltip {
+  font-size: 16px;
+  background: var(--color-primary);
+}
+
+mat-icon {
+  font-family: 'Material Icons Outlined';
+}

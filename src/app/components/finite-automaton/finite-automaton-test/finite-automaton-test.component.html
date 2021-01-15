@@ -1,0 +1,9 @@
+<form class="test-form" (submit)="test(automatonTest)">
+  <mat-form-field class="form-field form-field--long form-field--big" [appearance]="appearance">
+    <mat-label>Testar autômato</mat-label>
+    <input (change)="spread(automatonTest.value)" #automatonTest placeholder="Digite uma cadeia para testar e pressione Enter." matInput type="text">
+    <mat-progress-spinner *ngIf="isLoading" matSuffix diameter="32" class="spinner" color="accent" mode="indeterminate"></mat-progress-spinner>
+    <mat-icon matSuffix color="accent" *ngIf="isValid === true">check</mat-icon>
+    <mat-icon class="icon-not-valid" matSuffix color="warn" *ngIf="isValid === false">cancel</mat-icon>
+  </mat-form-field>
+</form>

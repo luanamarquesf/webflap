@@ -1,0 +1,27 @@
+<h1>AUTÔMATOS FINITOS SALVOS</h1>
+<mat-selection-list class="noselect" [multiple]="false" >
+  <mat-list-option [selected]="this.finiteAutomatonService.currentAutomatonIndex === i" *ngFor="let automaton of this.finiteAutomatonService.automatons; let i = index" (click)="this.finiteAutomatonService.select(i)">
+    <mat-icon mat-list-icon>grading</mat-icon>
+    <div mat-line>
+      <div class="grammar-title">{{ automaton.title }}</div>
+      <div class="date"
+        #tooltip="matTooltip"
+        matTooltipPosition="below"
+        [matTooltip]="automaton.modified | date: 'dd/MM/yyyy HH:mm:SS'"
+        matTooltipShowDelay="800"
+        matTooltipClass="tooltip"
+      >
+        {{ automaton.modified | dateAgo }}
+      </div>
+      <button class="btn-delete" type="button" mat-icon-button (click)="$event.preventDefault(); $event.stopPropagation(); openDialog(i);">
+        <mat-icon aria-label="Excluir autômato" class="icon-outline">delete</mat-icon>
+      </button>
+    </div>
+  </mat-list-option>
+  <mat-list-item>
+    <button mat-flat-button (click)="this.finiteAutomatonService.newAutomaton('Autômato sem nome')">
+      <mat-icon >add</mat-icon>
+      Criar novo Autômato Finito
+    </button>
+  </mat-list-item>
+</mat-selection-list>

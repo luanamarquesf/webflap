@@ -1,0 +1,47 @@
+h1 {
+  font-family: oswald;
+  font-size: 70px;
+  min-height: 70px;
+  line-height: initial;
+  margin-bottom: 30px;
+  color: var(--color-accent);
+}
+
+p {
+  font-family: 'oswald-light';
+  font-weight: lighter;
+  font-size: 2em;
+  line-height: 1em;
+}
+
+.content {
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content .header {
+  width: 100%;
+  margin-bottom: 52px;
+}
+
+app-finite-automaton-view,
+app-finite-automaton-list {
+  width: 100%;
+}
+
+app-finite-automaton-view { order: 2; }
+app-finite-automaton-list { order: 1; margin-top: 30px; }
+
+@media screen and (min-width: 1024px) {
+  app-finite-automaton-view {
+    width: 57%;
+  }
+
+  app-finite-automaton-list {
+    width: 40%;
+  }
+
+  app-finite-automaton-view { order: 1; }
+  app-finite-automaton-list { order: 2; margin-top: 0; }
+}

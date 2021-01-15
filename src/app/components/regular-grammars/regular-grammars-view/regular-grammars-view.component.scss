@@ -1,0 +1,91 @@
+.form-field.add-rule {
+  font-size: 1.5em;
+}
+
+.form-field.add-rule.add-rule--left {
+  width: 180px;
+}
+
+.form-field.add-rule.add-rule--right {
+  width: 280px;
+}
+.btn-add{
+  transform: scale(1.7);
+  margin-left: 27px;
+  position: relative;
+  top: -8px;
+}
+
+.btn-helper {
+  color: #03a9f4;
+}
+
+.btn-helper[color="danger"] {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.add-form {
+  margin-top: 52px;
+}
+
+.list-right-side {
+  font-family: "oswald-light";
+  display: flex;
+  align-items: center;
+  letter-spacing: 3px;
+  color: var(--color-accent);
+}
+
+.list-left-side {
+  font-family: "oswald";
+  font-size: 30px !important;
+}
+
+.grammar-rule {
+  font-size: 25px;
+}
+
+.right-arrow {
+  opacity: 0.3;
+  color: white;
+  margin: 0 10px 0 0;
+}
+
+mat-divider {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.form-field--long {
+  width: 100%;
+}
+
+.form-field--short {
+  width: 140px;
+  margin-left: 16px;
+}
+
+.form-field--big {
+  font-size: 1.5em;
+}
+
+.title-bar {
+  display: flex;
+}
+
+.test-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.test-row>* {
+  margin: 0 8px;
+}
+
+.test-row app-regular-grammars-test {
+  flex-grow: 1;
+  position: relative;
+  top:  13px;
+}

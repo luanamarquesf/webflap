@@ -1,0 +1,130 @@
+<mat-form-field class="form-field form-field--long form-field--big" appearance="fill">
+  <mat-label>Digite o nome do autômato finito</mat-label>
+  <input #automatonTitle [value]="finiteAutomatonService.currentAutomaton.title" (keyup)="finiteAutomatonService.currentAutomaton.title = automatonTitle.value; finiteAutomatonService.saveAll()" placeholder="Escolha um nome para o autômato finito" matInput type="text">
+</mat-form-field>
+<mat-divider></mat-divider>
+<div class="test-row">
+  <app-finite-automaton-test></app-finite-automaton-test>
+  <div>ou</div>
+  <button mat-flat-button (click)="openDialogTestMany()">
+    <mat-icon>reorder</mat-icon>
+    Testar várias
+  </button>
+</div>
+<mat-divider></mat-divider>
+<section class="action-buttons">
+  <button [disabled]="selectionMode" mat-flat-button color="primary" (click)="add($event)">
+    <mat-icon>add</mat-icon>
+    Novo Estado
+  </button>
+  <button [disabled]="selectionMode" mat-flat-button (click)="addTransition()">
+    <mat-icon>arrow_right_alt</mat-icon>
+    Nova transição
+  </button>
+  <button [disabled]="selectionMode" mat-flat-button (click)="removeNode()">
+    <mat-icon>remove</mat-icon>
+    Remover Estado ou Transição
+  </button>
+  <button
+    [disabled]="selectionMode"
+    mat-flat-button
+    color="accent"
+    (click)="fitGraph(); centerGraph(); refresh();"
+    #tooltip="matTooltip"
+    matTooltipPosition="below"
+    matTooltip="Alinha, centraliza e enquadra na tela o autômato finito. (Também salva as alterações feitas!)"
+    matTooltipShowDelay="800"
+    matTooltipClass="tooltip"
+  >
+    <mat-icon>scatter_plot</mat-icon>
+    Centralizar e alinhar
+  </button>
+</section>
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="toggleInitial(item)">
+      <mat-icon *ngIf="!item.initial">check_box_outline_blank</mat-icon>
+      <mat-icon *ngIf="item.initial">check_box</mat-icon>
+      <span>Estado Inicial</span>
+    </button>
+    <button mat-menu-item (click)="toggleFinal(item)">
+      <mat-icon *ngIf="!item.final">check_box_outline_blank</mat-icon>
+      <mat-icon *ngIf="item.final">check_box</mat-icon>
+      <span>Estado Final</span>
+    </button>
+  </ng-template>
+</mat-menu>
+<div style="visibility: hidden; position: fixed;"
+[style.left]="menuTopLeftPosition.x"
+[style.top]="menuTopLeftPosition.y"
+[matMenuTriggerFor]="menu">
+</div>
+
+<ngx-graph
+  (contextmenu)="$event.preventDefault();"
+  layout="dagre"
+  class="chart-container"
+  [autoCenter]="graphOptions.autoCenter"
+  style="height: 400px;"
+  [showMiniMap]="graphOptions.showMiniMap"
+  [links]="finiteAutomatonService.currentAutomaton.links"
+  [nodes]="finiteAutomatonService.currentAutomaton.nodes"
+  [zoomToFit$]="zoomToFit$"
+  [center$]="center$"
+
+>
+  <ng-template #nodeTemplate let-node>
+    <svg:g class="node" (click)="selectNode($event, node)" (contextmenu)="onRightClick($event, node)">
+      <svg:circle
+        [class.selected]="node.selected"
+        [attr.cx]="22"
+        [attr.cy]="20"
+        [attr.r]="22"
+        [attr.width]="44"
+        [attr.height]="44"
+        [attr.fill]="node.data.color"
+      />
+      <svg:circle
+        *ngIf="node.final"
+        class="is-final"
+        [attr.cx]="22"
+        [attr.cy]="20"
+        [attr.r]="18"
+        [attr.width]="44"
+        [attr.height]="44"
+      />
+      <svg:polygon
+        *ngIf="node.initial"
+        points="8,21 -10,5 -10,37"
+        class="initial"
+      />
+      <svg:text text-anchor="middle" [attr.x]="22" [attr.y]="25">
+        {{node.label}}
+      </svg:text>
+    </svg:g>
+  </ng-template>
+
+  <ng-template #linkTemplate let-link>
+    <svg:g class="edge">
+      <svg:path class="line" stroke-width="2" marker-end="url(#arrow)"></svg:path>
+      <svg:text class="edge-label" text-anchor="middle">
+        <textPath
+          class="text-path"
+          [attr.href]="'#' + link.id"
+          [style.dominant-baseline]="link.dominantBaseline"
+          startOffset="50%"
+        >
+          <a class="edge-part" *ngFor="let item of link.label.split(', '); let i = index" (click)="selectToRemoveLink(link, item)">
+            {{ item }}{{ item != link.label.split(', ')[link.label.split(', ').length - 1] ? ',' : '' }}
+          </a>
+        </textPath>
+      </svg:text>
+    </svg:g>
+  </ng-template>
+
+  <ng-template #defsTemplate>
+    <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
+      <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+    </svg:marker>
+  </ng-template>
+</ngx-graph>

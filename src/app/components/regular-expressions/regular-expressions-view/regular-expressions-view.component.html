@@ -1,0 +1,37 @@
+<div class="title-bar">
+  <mat-form-field class="form-field form-field--long form-field--big" appearance="fill">
+    <mat-label>Digite o nome da Expressão Regular</mat-label>
+    <input #regularExpressionTitle
+      [value]="regularExpressionsService.currentRegularExpression.title"
+      (keyup)="regularExpressionsService.currentRegularExpression.title = regularExpressionTitle.value; regularExpressionsService.saveAll()"
+      placeholder="Escolha um nome para a expressão regular"
+      matInput
+      type="text"
+    >
+  </mat-form-field>
+</div>
+
+<mat-divider></mat-divider>
+
+<mat-form-field class="form-field form-field--long form-field--big" appearance="outline">
+  <mat-label>Expressão Regular</mat-label>
+  <input #regularExpressionPattern
+    [value]="regularExpressionsService.currentRegularExpression.pattern"
+    (keyup)="regularExpressionsService.currentRegularExpression.pattern = regularExpressionPattern.value; regularExpressionsService.saveAll()"
+    placeholder="Expressão Regular"
+    matInput
+    type="text"
+  >
+  <mat-hint><button (click)="addEpsilon(regularExpressionPattern)" class="btn-helper" type="button" mat-button>Inserir caractere final (ε)</button></mat-hint>
+</mat-form-field>
+<div class="pattern">
+  {{ regularExpressionsService.currentRegularExpression.pattern | convertRe }}
+</div>
+<div class="test-row">
+  <app-regular-expressions-test></app-regular-expressions-test>
+  <div>ou</div>
+  <button mat-flat-button (click)="openDialogTestMany()">
+    <mat-icon>reorder</mat-icon>
+    Testar várias
+  </button>
+</div>

@@ -1,0 +1,15 @@
+.initial {
+  padding: 5%;
+  strong {
+    color: var(--color-accent);
+  }
+  .arrow{
+    width: 150px;
+    height: 120px;
+    transform: rotate(200deg);
+  }
+
+  .col {
+    margin-top: 5rem;
+  }
+}

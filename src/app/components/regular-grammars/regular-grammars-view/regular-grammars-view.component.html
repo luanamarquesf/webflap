@@ -1,0 +1,61 @@
+<form class="add-form" (submit)="addToGrammar(leftInput, rightInput)">
+  <div class="title-bar">
+    <mat-form-field class="form-field form-field--long form-field--big" appearance="fill">
+      <mat-label>Digite o nome da gramática</mat-label>
+      <input #grammarTitle [value]="this.regularGrammarsService.currentGrammar.title" (keyup)="this.regularGrammarsService.currentGrammar.title = grammarTitle.value" placeholder="Escolha um nome para a gramática" matInput type="text">
+    </mat-form-field>
+    <mat-form-field class="form-field form-field--short form-field--big" appearance="fill">
+      <mat-label>Símbolo inicial</mat-label>
+      <input #grammarInitial [value]="this.regularGrammarsService.currentGrammar.initial" (keyup)="this.regularGrammarsService.currentGrammar.initial = grammarInitial.value; this.regularGrammarsService.currentGrammar.generateDefinition()" placeholder="Defina o símbolo inicial" matInput type="text" pattern="[A-Z]">
+    </mat-form-field>
+  </div>
+  Para adicionar uma nova regra à gramática atual, use os campos abaixo. <br />
+  <mat-form-field class="form-field add-rule add-rule--left" appearance="outline">
+    <mat-label>Lado esquerdo</mat-label>
+    <input #leftInput maxlength="1" placeholder="S, A, etc..." matInput type="text" [formControl]="leftFormControl" [errorStateMatcher]="matcher">
+    <mat-error *ngIf="!leftFormControl.valid">
+      Favor digitar o lado esquerdo da regra corretamente.
+    </mat-error>
+  </mat-form-field>
+  <mat-icon class="noselect" style="margin: 0 10px">arrow_right_alt</mat-icon>
+  <mat-form-field class="form-field add-rule add-rule--right" appearance="outline">
+    <mat-label>Lado direito</mat-label>
+    <input #rightInput pattern="^((\w|ε)*[A-Z]?\ ?\|\ ?)*(\w|ε)+$" placeholder="aS | bS | a | b" matInput type="text"[formControl]="rightFormControl" [errorStateMatcher]="matcher">
+    <mat-hint *ngIf="!hasEpsilon(rightInput)"><button (click)="addEpsilon(rightInput)" class="btn-helper" type="button" mat-button>Incluir caractere final (ε)</button></mat-hint>
+    <mat-hint *ngIf="hasEpsilon(rightInput)"><button (click)="removeEpsilon(rightInput)" class="btn-helper" type="button" mat-button color="danger">Remover caractere final (ε)</button></mat-hint>
+    <mat-error *ngIf="!rightFormControl.valid">
+      Favor digitar as derivações da regra corretamente, separadas por " | " (pipe entre espaços) .
+    </mat-error>
+  </mat-form-field>
+  <button class="btn-add" type="submit" mat-icon-button [disabled]="!leftFormControl.valid || !rightFormControl.valid">
+    <mat-icon>add</mat-icon>
+  </button>
+</form>
+<mat-divider></mat-divider>
+<div class="test-row">
+  <app-regular-grammars-test></app-regular-grammars-test>
+  <div>ou</div>
+  <button mat-flat-button (click)="openDialogTestMany()">
+    <mat-icon>reorder</mat-icon>
+    Testar várias
+  </button>
+</div>
+<mat-divider></mat-divider>
+<mat-list role="list">
+  <mat-list-item *ngFor="let rule of this.regularGrammarsService.currentGrammar.rules; let i = index" class="grammar-rule">
+    <mat-icon title="Estado inicial" *ngIf="rule.left == this.regularGrammarsService.currentGrammar.initial" class="icon-outline noselect" mat-list-icon>label</mat-icon>
+    <div *ngIf="rule.left != this.regularGrammarsService.currentGrammar.initial" class="size-holder" mat-list-icon></div>
+    <div mat-list-icon class="list-left-side">
+      {{rule.left}}
+    </div>
+    <div mat-line style="padding: 5px 0 !important;">
+      <div class="list-right-side">
+        <mat-icon class="right-arrow noselect">arrow_right_alt</mat-icon>
+        <span [innerHTML]='rule.right.join(" | ") | formatGrammar'></span>
+      </div>
+    </div>
+    <button type="button" mat-icon-button>
+      <mat-icon aria-label="Excluir regra" class="icon-outline" (click)="removeFromGrammar(i)">delete</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>

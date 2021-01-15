@@ -1,0 +1,42 @@
+h1 {
+  font-family: oswald;
+  font-size: 70px;
+  min-height: 70px;
+  line-height: initial;
+  margin-bottom: 30px;
+  color: var(--color-accent);
+}
+p {
+  font-family: 'oswald-light';
+  font-weight: lighter;
+  font-size: 2em;
+  line-height: 1em;
+}
+
+.content {
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content .header {
+  width: 100%;
+}
+
+app-regular-grammars-view,
+app-regular-grammars-list {
+  width: 100%;
+}
+
+app-regular-grammars-view { order: 2; }
+app-regular-grammars-list { order: 1; margin-top: 30px; }
+
+@media screen and (min-width: 1024px) {
+  app-regular-grammars-view,
+  app-regular-grammars-list {
+    width: 48%;
+  }
+
+  app-regular-grammars-view { order: 1; }
+  app-regular-grammars-list { order: 2; margin-top: 0; }
+}

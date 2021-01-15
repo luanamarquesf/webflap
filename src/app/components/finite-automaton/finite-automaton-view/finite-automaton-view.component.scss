@@ -1,0 +1,75 @@
+.chart-container {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.arrow-head {
+  fill: #999;
+}
+
+.line {
+  stroke: #999;
+  stroke-width: 2.5;
+}
+
+.text-path {
+  fill: white;
+}
+
+mat-icon {
+  font-family: 'Material Icons Outlined';
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 36px 0;
+}
+
+.selected {
+  fill: var(--color-accent);
+}
+
+.edge-part {
+  font-size: 1.3em;
+}
+
+.is-final {
+  stroke: #303030;
+  stroke-width: 4;
+  fill: transparent;
+}
+
+.initial {
+  fill: white;
+  stroke: black;
+  stroke-width: 1;
+}
+
+.form-field--long {
+  width: 100%;
+}
+
+.form-field--big {
+  font-size: 1.5em;
+}
+
+.test-row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.test-row>* {
+  margin: 0 8px;
+}
+
+.test-row app-finite-automaton-test {
+  flex-grow: 1;
+  position: relative;
+  top:  13px;
+}
+
+::ng-deep .ngx-charts-outer {
+  height: 400px !important;
+}
