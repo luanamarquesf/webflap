@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'regular-expressions', component: RegularExpressionsComponent },
   { path: 'regular-grammars', component: RegularGrammarsComponent },
   { path: 'finite-automaton', component: FiniteAutomatonComponent },
-  { path: 'initial', component: InitialComponent },
+  { path: '**', component: InitialComponent,  },
 ];
 
 @NgModule({
