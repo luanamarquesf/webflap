@@ -4,7 +4,7 @@ Simulador de autômatos finitos, expressões regulares e gramáticas regulares p
 
 ## Deploy
 
-Para fazer o deploy da aplicação, use o comando `ng deploy --base-href=/webflap/`. Você poderá verificar a publicação no endereço [https://chinaglia-rafa.github.io/webflap/](https://chinaglia-rafa.github.io/webflap/) quando o GitHub finalizar o processamento das pages.
+Para fazer o deploy da aplicação, use o comando `ng deploy --base-href=/webflap/`. Você poderá verificar a publicação no endereço [https://luanamarquesf.github.io/webflap/](https://luanamarquesf.github.io/webflap/) quando o GitHub finalizar o processamento das pages.
 
 <details><summary>INFORMAÇÕES DO ANGULAR</summary>
 <p>
